@@ -1,5 +1,6 @@
 "auto";
-passwd = "111111";
+//这里设置锁屏密码
+passwd = "";
 
 ques = ["（单选）遇到磁盘数据损坏，WPS会员有没有数据修复特权？",
     "（单选）以下哪个是WPS会员特权中的一个？",
@@ -31,12 +32,10 @@ ans = ["有，且无限次",
 ];
 
 unlock(passwd);
-
+//这里设置签到期间手机常亮的时间，实例为3分钟
 device.keepScreenOn(3 * 60 * 1000);
 
 wpscheckin();
-
-//device.cancelKeepingAwake();
 
 daoke();
 
@@ -69,8 +68,6 @@ function wpscheckin() {
 function wpsanswer(que) {
     if (ques.indexOf(que)) {
         an = ans[ques.indexOf(que)];
-        //console.show();
-        //console.log(an);
         className("android.view.View").textContains(an).findOne().click();
         sleep(2000);
         className("android.widget.Button").text("确认").findOne().click();
@@ -108,7 +105,6 @@ function daoke() {
     killlast();
     daokein();
     if (className("android.view.View").text("签到领奖励").exists()) {
-        //可能需要取中心点进行点击
         className("android.view.View").text("签到领奖励").findOne().click();
     }
     sleep(1000);
@@ -116,17 +112,14 @@ function daoke() {
     daokein();
     if (className("android.widget.Button").text("立即领取").exists()) {
     	className("android.widget.Button").text("立即领取").findOne().click();
-    	sleep(5000);
-    	//if (className("android.view.View").text("领取成功").exists()) {
-    	//	killlast();
-    	//	}	
-	}
+    	sleep(5000);	
+    }
 }
 
 
 function killlast() {
     sleep(1000);
-	home();
+    home();
     sleep(1000);
     recents();
     sleep(1000);
@@ -137,68 +130,6 @@ function killlast() {
 }
 
 function unlock(passwd) {
-    /*
-	function p1() {
-        sleep(1000);
-        click(device.width * 0.2, device.height * 0.63);
-        sleep(1000);
-    }
-
-    function p2() {
-        sleep(1000);
-        click(device.width * 0.5, device.height * 0.63);
-        sleep(1000);
-    }
-
-    function p3() {
-        sleep(1000);
-        click(device.width * 0.79, device.height * 0.63);
-        sleep(300);
-    }
-
-    function p4() {
-        sleep(1000);
-        click(device.width * 0.2, device.height * 0.72);
-        sleep(1000);
-    }
-
-    function p5() {
-        sleep(1000);
-        click(device.width * 0.5, device.height * 0.72);
-        sleep(1000);
-    }
-
-    function p6() {
-        sleep(1000);
-        click(device.width * 0.79, device.height * 0.72);
-        sleep(1000);
-    }
-
-    function p7() {
-        sleep(1000);
-        click(device.width * 0.2, device.height * 0.81);
-        sleep(1000);
-    }
-
-    function p8() {
-        sleep(1000);
-        click(device.width * 0.5, device.height * 0.81);
-        sleep(1000);
-    }
-
-    function p9() {
-        sleep(1000);
-        click(device.width * 0.79, device.height * 0.81);
-        sleep(1000);
-    }
-
-    function p0() {
-        sleep(1000);
-        click(device.width * 0.5, device.height * 0.9);
-        sleep(1000);
-    }
-	*/
-    //device.wakeUp();
     sleep(1000);
     device.wakeUpIfNeeded();
     sleep(1000);
