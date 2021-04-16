@@ -2,6 +2,8 @@
 //这里设置锁屏密码
 passwd = "";
 
+//一些单选题的题目及对应答案，如有不全可以自行增加，一对一
+
 ques = ["（单选）遇到磁盘数据损坏，WPS会员有没有数据修复特权？",
     "（单选）以下哪个是WPS会员特权中的一个？",
     "（单选）通过什么工具可以将多张图片转成一个PDF文档？",
@@ -55,6 +57,7 @@ function wpscheckin() {
     sleep(5000);
     swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
     sleep(1000);
+    //这里尝试过查找小程序的控件点击没有成功
     click(device.width * 0.18, device.height * 0.45);
     sleep(5000);
     if (className("android.widget.Button").text("立即打卡，分会员").exists()) {
@@ -95,6 +98,7 @@ function daokein(){
 	sleep(5000);
 	swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
 	sleep(2000);
+	//这里尝试过查找小程序的控件点击没有成功
 	click(device.width * 0.39, device.height * 0.45);
 	sleep(5000);
 	}
