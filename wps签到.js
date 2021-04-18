@@ -1,9 +1,9 @@
 "auto";
-//这里设置锁屏密码
+//这里填写你的数字锁屏密码
 passwd = "";
 
-//一些单选题的题目及对应答案，如有不全可以自行增加，一对一
 
+//一些单选题的题目及对应答案，如有不全可以自行增加，一对一
 ques = ["（单选）遇到磁盘数据损坏，WPS会员有没有数据修复特权？",
     "（单选）以下哪个是WPS会员特权中的一个？",
     "（单选）通过什么工具可以将多张图片转成一个PDF文档？",
@@ -34,32 +34,22 @@ ans = ["有，且无限次",
 ];
 
 unlock(passwd);
-//这里设置签到期间手机常亮的时间，实例为3分钟
 device.keepScreenOn(3 * 60 * 1000);
-
 wpscheckin();
-
+//device.cancelKeepingAwake();
 daoke();
-
-
 device.keepScreenOn(1000);
 engines.myEngine().forceStop();
 
 
-
-
 function wpscheckin() {
     app.launch("com.tencent.mm");
-    sleep(1000);
+    sleep(5000);
     killlast();
     sleep(1000);
-    app.launch("com.tencent.mm");
-    sleep(5000);
-    swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
-    sleep(1000);
-    //这里尝试过查找小程序的控件点击没有成功
-    click(device.width * 0.18, device.height * 0.45);
-    sleep(5000);
+    wpsin();
+    killlast();
+    wpsin();
     if (className("android.widget.Button").text("立即打卡，分会员").exists()) {
         className("android.widget.Button").text("立即打卡，分会员").findOne().click();
         que = changeque();
@@ -68,9 +58,23 @@ function wpscheckin() {
     }
 }
 
+function wpsin(){
+	app.launch("com.tencent.mm");
+    sleep(5000);
+    swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
+    sleep(1000);
+    text("我的WPS会员").findOne().parent().click();
+    //click(text("我的WPS会员").findOne().bounds().centerX(),text("小程序").findOne().bounds().centerY());
+    //click(device.width * 0.18, device.height * 0.45);
+    sleep(5000);
+}
+
+//仅答单选题，多选直接确认跳过
 function wpsanswer(que) {
     if (ques.indexOf(que)) {
         an = ans[ques.indexOf(que)];
+        //console.show();
+        //console.log(an);
         className("android.view.View").textContains(an).findOne().click();
         sleep(2000);
         className("android.widget.Button").text("确认").findOne().click();
@@ -98,8 +102,8 @@ function daokein(){
 	sleep(5000);
 	swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
 	sleep(2000);
-	//这里尝试过查找小程序的控件点击没有成功
-	click(device.width * 0.39, device.height * 0.45);
+	text("WPS稻壳会员").findOne().parent().click();  
+	//click(device.width * 0.39, device.height * 0.45);
 	sleep(5000);
 	}
 
@@ -109,6 +113,7 @@ function daoke() {
     killlast();
     daokein();
     if (className("android.view.View").text("签到领奖励").exists()) {
+        //可能需要取中心点进行点击
         className("android.view.View").text("签到领奖励").findOne().click();
     }
     sleep(1000);
@@ -116,14 +121,16 @@ function daoke() {
     daokein();
     if (className("android.widget.Button").text("立即领取").exists()) {
     	className("android.widget.Button").text("立即领取").findOne().click();
-    	sleep(5000);	
-    }
+    	sleep(5000);
+    	//if (className("android.view.View").text("领取成功").exists()) {
+    	//	killlast();
+    	//	}	
+	}
 }
-
 
 function killlast() {
     sleep(1000);
-    home();
+	home();
     sleep(1000);
     recents();
     sleep(1000);
@@ -134,6 +141,7 @@ function killlast() {
 }
 
 function unlock(passwd) {
+    //device.wakeUp();
     sleep(1000);
     device.wakeUpIfNeeded();
     sleep(1000);
