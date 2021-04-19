@@ -113,8 +113,7 @@ function daoke() {
     killlast();
     daokein();
     if (className("android.view.View").text("签到领奖励").exists()) {
-        //可能需要取中心点进行点击
-        className("android.view.View").text("签到领奖励").findOne().click();
+        className("android.view.View").text("签到领奖励").findOne().parent().click();
     }
     sleep(1000);
     killlast();
