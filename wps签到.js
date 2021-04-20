@@ -52,6 +52,7 @@ function wpscheckin() {
     wpsin();
     if (className("android.widget.Button").text("立即打卡，分会员").exists()) {
         className("android.widget.Button").text("立即打卡，分会员").findOne().click();
+	sleep(2000);    
         que = changeque();
         sleep(2000);
         wpsanswer(que);
