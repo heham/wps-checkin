@@ -34,7 +34,7 @@ ans = ["有，且无限次",
 ];
 
 unlock(passwd);
-device.keepScreenOn(3 * 60 * 1000);
+device.keepScreenOn(5 * 60 * 1000);
 wpscheckin();
 //device.cancelKeepingAwake();
 daoke();
@@ -51,7 +51,9 @@ function wpscheckin() {
     killlast();
     wpsin();
     if (className("android.widget.Button").text("立即打卡，分会员").exists()) {
-        className("android.widget.Button").text("立即打卡，分会员").findOne().click();
+	//测试有的手机通过控件点击会有问题，有些又似乎相反，看情况采用，注释掉下面不用的那一行就可以了，以下有点击的类似    
+        //className("android.widget.Button").text("立即打卡，分会员").findOne().click();
+	click(text("立即打卡，分会员").findOne().bounds().centerX(),text("立即打卡，分会员").findOne().bounds().centerY());
 	sleep(2000);    
         que = changeque();
         sleep(2000);
@@ -64,9 +66,8 @@ function wpsin(){
     sleep(5000);
     swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
     sleep(1000);
-    text("我的WPS会员").findOne().parent().click();
-    //click(text("我的WPS会员").findOne().bounds().centerX(),text("小程序").findOne().bounds().centerY());
-    //click(device.width * 0.18, device.height * 0.45);
+    //text("我的WPS会员").findOne().parent().click();
+    click(text("我的WPS会员").findOne().bounds().centerX(),text("我的WPS会员").findOne().bounds().centerY());
     sleep(5000);
 }
 
@@ -78,7 +79,8 @@ function wpsanswer(que) {
         //console.log(an);
         className("android.view.View").textContains(an).findOne().click();
         sleep(2000);
-        className("android.widget.Button").text("确认").findOne().click();
+	click(text("确认").findOne().bounds().centerX(),text("确认").findOne().bounds().centerY());
+        //className("android.widget.Button").text("确认").findOne().click();
         sleep(3000);
 		killlast();
     } else {
@@ -89,7 +91,8 @@ function wpsanswer(que) {
 function changeque() {
     do {
     	sleep(2000);
-        className("android.widget.Button").text("确认").findOne().click();
+	click(text("确认").findOne().bounds().centerX(),text("确认").findOne().bounds().centerY());    
+        //className("android.widget.Button").text("确认").findOne().click();
         sleep(2000);
     } while (className("android.view.View").textContains("多选").exists());
     que = className("android.view.View").textContains("单选").findOne().text();
@@ -103,8 +106,8 @@ function daokein(){
 	sleep(5000);
 	swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
 	sleep(2000);
-	text("WPS稻壳会员").findOne().parent().click();  
-	//click(device.width * 0.39, device.height * 0.45);
+	click(text("WPS稻壳会员").findOne().bounds().centerX(),text("WPS稻壳会员").findOne().bounds().centerY());
+	//text("WPS稻壳会员").findOne().parent().click();  
 	sleep(5000);
 	}
 
@@ -114,13 +117,15 @@ function daoke() {
     killlast();
     daokein();
     if (className("android.view.View").text("签到领奖励").exists()) {
-        className("android.view.View").text("签到领奖励").findOne().parent().click();
+	click(text("签到领奖励").findOne().bounds().centerX(),text("签到领奖励").findOne().bounds().centerY());    
+        //className("android.view.View").text("签到领奖励").findOne().parent().click();
     }
     sleep(1000);
     killlast();
     daokein();
     if (className("android.widget.Button").text("立即领取").exists()) {
-    	className("android.widget.Button").text("立即领取").findOne().click();
+	click(text("立即领取").findOne().bounds().centerX(),text("立即领取").findOne().bounds().centerY());    
+    	//className("android.widget.Button").text("立即领取").findOne().click();
     	sleep(5000);
     	//if (className("android.view.View").text("领取成功").exists()) {
     	//	killlast();
