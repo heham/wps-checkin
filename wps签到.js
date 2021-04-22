@@ -51,7 +51,8 @@ function wpscheckin() {
     killlast();
     wpsin();
     if (className("android.widget.Button").text("立即打卡，分会员").exists()) {
-	//测试有的手机通过控件点击会有问题，有些又似乎相反，看情况采用，注释掉下面不用的那一行就可以了，以下有点击的类似    
+	//测试有的手机通过控件点击会有问题，有些又似乎相反，看情况采用，注释掉下面不用的那一行就可以了，以下有点击的类似
+	//滑动说明第一个参数为滑动起始点的X坐标，第二个参数为滑动起始点的Y坐标，第三个参数为滑动终止点的X坐标，第四个参数为滑动终止点的Y坐标，最后一个是滑动操作的时间单位毫秒 
         //className("android.widget.Button").text("立即打卡，分会员").findOne().click();
 	click(text("立即打卡，分会员").findOne().bounds().centerX(),text("立即打卡，分会员").findOne().bounds().centerY());
 	sleep(2000);    
