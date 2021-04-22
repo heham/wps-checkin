@@ -62,8 +62,9 @@ function wpscheckin() {
 }
 
 function wpsin(){
-	app.launch("com.tencent.mm");
+    app.launch("com.tencent.mm");
     sleep(5000);
+    //偶尔出现了不能读取设备宽度和高度的情况，导致下面的滑动操作不成功，可以按自己分辨率计算一下把数值写上去。以下类似
     swipe(device.width / 2, device.height / 4, device.width / 2, device.height / 2 * 3, 500);
     sleep(1000);
     //text("我的WPS会员").findOne().parent().click();
@@ -135,7 +136,7 @@ function daoke() {
 
 function killlast() {
     sleep(1000);
-	home();
+    home();
     sleep(1000);
     recents();
     sleep(1000);
