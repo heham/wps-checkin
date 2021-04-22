@@ -84,7 +84,6 @@ function wpsanswer(que) {
 	click(text("确认").findOne().bounds().centerX(),text("确认").findOne().bounds().centerY());
         //className("android.widget.Button").text("确认").findOne().click();
         sleep(3000);
-		killlast();
     } else {
         return changeque();
     }
