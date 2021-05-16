@@ -35,9 +35,9 @@ ans = ["有，且无限次",
 
 unlock(passwd);
 device.keepScreenOn(5 * 60 * 1000);
-wpscheckin();
 //device.cancelKeepingAwake();
 daoke();
+wpscheckin();
 device.keepScreenOn(1000);
 engines.myEngine().forceStop();
 
@@ -148,6 +148,8 @@ function killlast() {
 
 function unlock(passwd) {
     //device.wakeUp();
+    sleep(1000); 
+    device.wakeUp();
     sleep(1000);
     device.wakeUpIfNeeded();
     sleep(1000);
